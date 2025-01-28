@@ -91,13 +91,15 @@ export const EventsPage = () => {
   }
 
   if (!events.length) {
-    return <div>No events available</div>;
+    return <div>
+    <h1> Unable to connect. Please ensure you are connected to JSON server API. </h1>
+    </div>;
   }
 
   return (
     <Box
       padding={{ base: "20px", md: "30px" }}
-      bgGradient="linear(to-r, gray.300, yellow.400, pink.200)"
+      backgroundColor="#eeeeee"
       minHeight="100vh"
       width="100%"
     >
@@ -138,6 +140,7 @@ export const EventsPage = () => {
       </Flex>
 
       <Flex justifyContent="center">
+        {filteredEvents.length > 0 ? (
         <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing="30px">
           {filteredEvents.map((event) => (
             <Box
@@ -186,6 +189,11 @@ export const EventsPage = () => {
             </Box>
           ))}
         </SimpleGrid>
+         ) : (
+          <Text fontSize="xl" fontWeight="bold" mt="20px" color="#3a4750">
+            No event found
+          </Text>
+        )}
       </Flex>
       <AddEventModal
         isOpen={isOpen}
